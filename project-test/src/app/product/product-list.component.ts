@@ -8,14 +8,29 @@ import { IProduct } from './product';
     templateUrl: './product-list.component.html',
     styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit{
+export class ProductListComponent implements OnInit {
     pageTitle = 'Product List';
     imageWidth = 50;
     imageMargin = 2;
     showImage = false;
-    listFilter = 'cart';
+    _listFilter: string;
+
+    constructor() {
+        this.filteredProducts = this.products;
+        this.listFilter = 'cart';
+    }
+
+    get listFilter(): string {
+        return this._listFilter;
+    }
+    set listFilter(value: string) {
+        this._listFilter = value;
+        this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
+
+    }
     errorMessage: string;
 
+    filteredProducts: IProduct[];
     products: IProduct[] = [{
         'productId': 1,
         'productName': 'Leaf Rake',
@@ -37,9 +52,7 @@ export class ProductListComponent implements OnInit{
         'imageUrl': 'http://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png'
     }];
 
-    // constructor(private _productService: ProductService) {
 
-    // }
 
     toggleImage(): void {
         this.showImage = !this.showImage;
@@ -51,7 +64,10 @@ export class ProductListComponent implements OnInit{
         //         .subscribe(products => this.products = products,
         //                    error => this.errorMessage = <any>error);
     }
-
+    performFilter(filterBy: string): IProduct[] {
+        filterBy = filterBy.toLocaleLowerCase();
+        return this.products.filter((prodoct: IProduct) => prodoct.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+    }
     // onRatingClicked(message: string): void {
     //     this.pageTitle = 'Product List: ' + message;
     // }
