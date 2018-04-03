@@ -13,7 +13,7 @@ export class ProductListComponent {
     imageWidth = 50;
     imageMargin = 2;
     showImage = false;
-    listFilter: string;
+    listFilter = 'cart';
     errorMessage: string;
 
     products: any[] = [{
@@ -41,9 +41,9 @@ export class ProductListComponent {
 
     // }
 
-    // toggleImage(): void {
-    //     this.showImage = !this.showImage;
-    // }
+    toggleImage(): void {
+        this.showImage = !this.showImage;
+    }
 
     // ngOnInit(): void {
     //     this._productService.getProducts()
