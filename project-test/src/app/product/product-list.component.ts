@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-// import { IProduct } from '../product';
+import { IProduct } from './product';
 // import { ProductService } from './product.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
     templateUrl: './product-list.component.html',
     styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit{
     pageTitle = 'Product List';
     imageWidth = 50;
     imageMargin = 2;
@@ -16,7 +16,7 @@ export class ProductListComponent {
     listFilter = 'cart';
     errorMessage: string;
 
-    products: any[] = [{
+    products: IProduct[] = [{
         'productId': 1,
         'productName': 'Leaf Rake',
         'productCode': 'GDN-0011',
@@ -45,11 +45,12 @@ export class ProductListComponent {
         this.showImage = !this.showImage;
     }
 
-    // ngOnInit(): void {
-    //     this._productService.getProducts()
-    //             .subscribe(products => this.products = products,
-    //                        error => this.errorMessage = <any>error);
-    // }
+    ngOnInit(): void {
+        console.log('In OnInit');
+        // this._productService.getProducts()
+        //         .subscribe(products => this.products = products,
+        //                    error => this.errorMessage = <any>error);
+    }
 
     // onRatingClicked(message: string): void {
     //     this.pageTitle = 'Product List: ' + message;
