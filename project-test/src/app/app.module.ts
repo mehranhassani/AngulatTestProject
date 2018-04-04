@@ -6,6 +6,9 @@ import { ProductListComponent } from './product/product-list.component';
 import { Replace } from './shared/replace.pipe';
 import { StarComponent } from './shared/star.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ProductDetailsComponent } from './product/product-details.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -14,11 +17,20 @@ import { HttpClientModule } from '@angular/common/http';
     ProductListComponent,
     Replace,
     StarComponent,
+    ProductDetailsComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot([
+      { path: 'product', component : ProductListComponent },
+      { path: 'product/:id', component : ProductDetailsComponent },
+      { path: 'welcome', component: WelcomeComponent },
+      { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+      { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent]
