@@ -8,5 +8,5 @@ import { ProductService } from './product/product.service';
   providers: [ProductService]
 })
 export class AppComponent {
-  title = 'The test app from pluralsight';
+  pageTitle = 'The test app from pluralsight';
 }
